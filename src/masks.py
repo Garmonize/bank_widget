@@ -12,8 +12,6 @@ def get_mask_account(account_number: str) -> str:
     Номер счета замаскирован и отображается в формате **XXXX, где X — это цифра номера.
     """
     formatted_account_number = f"**{account_number[-4:]}"
+
     return formatted_account_number
 
-
-print(get_mask_card_number(input()))
-print(get_mask_account(input()))
