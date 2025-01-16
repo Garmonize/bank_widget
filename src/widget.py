@@ -22,7 +22,3 @@ def get_date(date_data: str) -> str:
     year, month, day = cleaned_str.split("-")  # разделяет значение по символу "-" и добавляются переменные
     formatted_date = f"{day}.{month}.{year}"
     return formatted_date
-
-
-print(mask_account_card(input()))
-print(get_date(input()))
