@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from masks import get_mask_account, get_mask_card_number
 
 
@@ -16,9 +18,7 @@ def mask_account_card(card_info: str) -> str:
         return f"{formatted[0]} {masked_card_number}"
 
 
-def get_date(date_data: str) -> str:
+def get_date(raw_date: str) -> str:
     """Функция принимает строку с необработанной датой, очищает ее и возвращает строку в формате ДД.ММ.ГГГГ"""
-    cleaned_str = date_data.split("T")[0]  # разделяет строку по символу Т и выводит только первый индекс
-    year, month, day = cleaned_str.split("-")  # разделяет значение по символу "-" и добавляются переменные
-    formatted_date = f"{day}.{month}.{year}"
-    return formatted_date
+    date_obj = datetime.strptime(raw_date, '%Y-%m-%dT%H:%M:%S.%f')
+    return date_obj.strftime('%d.%m.%Y')
