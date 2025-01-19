@@ -31,7 +31,7 @@ def test_get_mask_card_number(input_card_number: str, expected_card_number: str)
 )
 def test_get_mask_card_number_error(wrong_card_number: str) -> None:
     """функция проверяет вывод ошибки при вводе пользователем данных карты не в правильном формате"""
-    with pytest.raises(TypeError) as exc_card_info:
+    with pytest.raises(ValueError) as exc_card_info:
         get_mask_card_number(wrong_card_number)
 
     assert str(exc_card_info.value) == "Введите корректный номер карты. Номер должен состоять из 16 цифр, без пробелов"
@@ -64,7 +64,7 @@ def test_get_mask_account_number(input_account_number: str, expected_account_num
 )
 def test_get_mask_account_number_error(wrong_account_number: str) -> None:
     """функция проверяет вывод ошибки при вводе пользователем данных счета не в правильном формате"""
-    with pytest.raises(TypeError) as exc_account_info:
+    with pytest.raises(ValueError) as exc_account_info:
         get_mask_account_number(wrong_account_number)
 
     assert (
