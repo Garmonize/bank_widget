@@ -18,7 +18,7 @@ def mask_account_card(card_info: str) -> str:
     raw_digits = "".join([x for x in card_info if x.isdigit()])
     formatted_card_type = name_dict.get(raw_text.lower())
     if len(raw_digits) not in [16, 20]:
-        raise TypeError("Введите корректные данные")
+        raise ValueError("Введите корректные данные")
     elif len(raw_digits) == 16:
         return (
             f"{formatted_card_type if formatted_card_type is not None else ""} " 
@@ -31,5 +31,12 @@ def mask_account_card(card_info: str) -> str:
 
 def get_date(raw_date: str) -> str:
     """Функция принимает строку с необработанной датой, очищает ее и возвращает строку в формате ДД.ММ.ГГГГ"""
-    date_obj = datetime.strptime(raw_date, "%Y-%m-%dT%H:%M:%S.%f")
+    try:
+        date_obj = datetime.strptime(raw_date, "%Y-%m-%dT%H:%M:%S.%f")
+    except ValueError:
+        try:
+            date_obj = datetime.strptime(raw_date, "%Y-%m-%dT%H:%M:%S")
+        except ValueError:
+            raise ValueError("Введите корректный формат даты")
+
     return date_obj.strftime("%d.%m.%Y")

@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import mask_account_card
+from src.widget import mask_account_card, get_date
 
 
 @pytest.mark.parametrize(
@@ -43,8 +43,27 @@ def test_uncleaned_format(uncleaned_format: str, cleaned_format: str) -> None:
         "uywury817238740127340891778917203847kjhghwe",
     ],
 )
-def test_wrong_data_input(wrong_number_input: str) -> None:
-    with pytest.raises(TypeError) as exc_info:
+def test_wrong_numbers_input(wrong_number_input: str) -> None:
+    with pytest.raises(ValueError) as exc_info:
         mask_account_card(wrong_number_input)
 
     assert str(exc_info.value) == "Введите корректные данные"
+
+
+@pytest.mark.parametrize(
+    "raw_date_input, expected_date_format",
+    [
+        ("2024-03-11T02:26:18.671407", "11.03.2024"),
+        ("2024-03-11T02:26:18", "11.03.2024"),
+    ],
+)
+def test_get_formatted_date(raw_date_input: str, expected_date_format: str) -> None:
+    assert get_date(raw_date_input) == expected_date_format
+
+
+@pytest.mark.parametrize("wrong_date_input", ["2024809809[8411234", "date", "2"])
+def test_wrong_date_format(wrong_date_input: str) -> None:
+    with pytest.raises(ValueError) as exp_info:
+        get_date(wrong_date_input)
+
+    assert str(exp_info.value) == "Введите корректный формат даты"
