@@ -19,5 +19,3 @@ check = [
     {"id": 594226727, "state": "CANCELED", "date": "2018-09-12T21:27:25.241689"},
     {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
 ]
-
-print(sort_by_date(check, False))
