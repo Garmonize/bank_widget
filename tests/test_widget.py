@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import mask_account_card, get_date
+from src.widget import get_date, mask_account_card
 
 
 @pytest.mark.parametrize(
@@ -14,6 +14,7 @@ from src.widget import mask_account_card, get_date
     ],
 )
 def test_mask_account_type(input_card_or_account_number: str, expected_masked_card_or_account_number: str) -> None:
+    """функция тестирует корректность значении при вводе данных"""
     assert mask_account_card(input_card_or_account_number) == expected_masked_card_or_account_number
 
 
@@ -31,6 +32,7 @@ def test_mask_account_type(input_card_or_account_number: str, expected_masked_ca
     ],
 )
 def test_uncleaned_format(uncleaned_format: str, cleaned_format: str) -> None:
+    """функция тестирует форматирование ввода пользователя согласно заданным параметрам"""
     assert mask_account_card(uncleaned_format) == cleaned_format
 
 
@@ -44,6 +46,7 @@ def test_uncleaned_format(uncleaned_format: str, cleaned_format: str) -> None:
     ],
 )
 def test_wrong_numbers_input(wrong_number_input: str) -> None:
+    """функция тестирует появление ошибки, если данные были введены некорректно"""
     with pytest.raises(ValueError) as exc_info:
         mask_account_card(wrong_number_input)
 
@@ -58,11 +61,13 @@ def test_wrong_numbers_input(wrong_number_input: str) -> None:
     ],
 )
 def test_get_formatted_date(raw_date_input: str, expected_date_format: str) -> None:
+    """функция тестирует обработку данных с милисекундами и без"""
     assert get_date(raw_date_input) == expected_date_format
 
 
 @pytest.mark.parametrize("wrong_date_input", ["2024809809[8411234", "date", "2"])
 def test_wrong_date_format(wrong_date_input: str) -> None:
+    """функция тестирует появление ошибки, если данные были введены некорректно"""
     with pytest.raises(ValueError) as exp_info:
         get_date(wrong_date_input)
 

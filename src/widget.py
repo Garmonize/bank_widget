@@ -21,12 +21,13 @@ def mask_account_card(card_info: str) -> str:
         raise ValueError("Введите корректные данные")
     elif len(raw_digits) == 16:
         return (
-            f"{formatted_card_type if formatted_card_type is not None else ""} " 
-            f"{get_mask_card_number(raw_digits)}").strip()
+            f"{formatted_card_type if formatted_card_type is not None else ""} " f"{get_mask_card_number(raw_digits)}"
+        ).strip()
     else:
         return (
             f"{formatted_card_type if formatted_card_type is not None else ""} "
-            f"{get_mask_account_number(raw_digits)}").strip()
+            f"{get_mask_account_number(raw_digits)}"
+        ).strip()
 
 
 def get_date(raw_date: str) -> str:
