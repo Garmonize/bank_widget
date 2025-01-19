@@ -14,7 +14,7 @@ def get_mask_account_number(account_number: str) -> str:
     Номер счета замаскирован и отображается в формате **XXXX, где X — это цифра номера.
     """
     if not isinstance(account_number, str) or not account_number.isdigit() or not len(account_number) == 20:
-        raise TypeError("Введите корректный номер счета. Номер должен быть состоять из 20 цифр, без пробелов")
+        raise TypeError("Введите корректный номер счета. Номер должен состоять из 20 цифр, без пробелов")
 
     formatted_account_number = f"**{account_number[-4:]}"
     return formatted_account_number
