@@ -35,7 +35,7 @@ def test_filter_by_wrong_input(
     assert str(exp_info.value) == "Введите значение ключа"
 
 
-@pytest.mark.parametrize("reverse", [(True)])
+@pytest.mark.parametrize("reverse", [True])
 def test_sorting_by_date_reverse(
     input_raw_data_to_be_filtered: list[dict],
     result_sorting_by_date_reverse: list[dict],
@@ -45,7 +45,7 @@ def test_sorting_by_date_reverse(
     assert sort_by_date(input_raw_data_to_be_filtered, reverse) == result_sorting_by_date_reverse
 
 
-@pytest.mark.parametrize("reverse", [(False)])
+@pytest.mark.parametrize("reverse", [False])
 def test_sorting_by_date_forward(
     input_raw_data_to_be_filtered: list[dict], result_sorting_by_date_forward: list[dict], reverse: bool
 ) -> None:

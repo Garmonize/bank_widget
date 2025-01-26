@@ -52,7 +52,9 @@ default_transactions = [
 def filter_by_currency(transaction_for_filter: list[dict], currency: str = "USD") -> Iterator[dict]:
     """Принимает на вход список словарей представляющих транзакции и итератор, который поочередно выдает
     транзакции, где валюта операции соответствует заданной"""
-    return (x for x in transaction_for_filter if x["operationAmount"]["currency"]["code"] == currency)
+    if not isinstance(transaction_for_filter, list):
+        raise TypeError("Данные переданы неверно")
+    return (x for x in transaction_for_filter if x["operationAmount"]["currency"]["code"] == currency.upper())
 
 
 filtered_data = filter_by_currency(default_transactions)
@@ -77,16 +79,18 @@ while True:
         break
 
 
+REG_LENGHT = 16
+
 def card_number_generator(beginning: int = 1, end: int = 9999999999999999) -> Iterator[str]:
     """функция генерирует значения карт от 1 до 9999 9999 9999 9999, принимая начальное и конечное значения, а также,
     если они не заданы, то генерирует по значениям по умолчанию. Функция также приводит полученные номера карт к
     банковскому формату ХХХХ ХХХХ ХХХХ ХХХХ"""
     for number in range(beginning, end + 1):
         number_str = str(number)
-        reg_length = 16
-        if len(number_str) < reg_length:
-            formatted_with_zeros = "0" * (reg_length - len(number_str)) + number_str
-            grouped_bank_number = " ".join(formatted_with_zeros[i: i + 4] for i in range(0, reg_length, 4))
+        number_len = len(number_str)
+        if number_len < REG_LENGHT:
+            number_str = "0" * (REG_LENGHT - number_len) + number_str
+        grouped_bank_number = " ".join(number_str[i: i + 4] for i in range(0, REG_LENGHT, 4))
         yield grouped_bank_number
 
 
