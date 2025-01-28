@@ -69,3 +69,29 @@ def result_sorting_by_date_forward() -> list[dict]:
         {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
     ]
     return result_info
+
+
+@pytest.fixture
+def input_data_list_of_dicts() -> list[dict]:
+    """функция предоставляет список входящих данных для проверки"""
+    info_input = [
+        {
+            "id": 987654321,
+            "state": "CANCELED",
+            "date": "2020-11-11T11:11:11.111111",
+            "operationAmount": {"amount": "100.00", "currency": {"name": "EUR", "code": "EUR"}},
+            "description": "Возврат средств",
+            "from": "Счет 11223344556677889900",
+            "to": "Счет 22334455667788990011",
+        },
+        {
+            "id": 555555555,
+            "state": "EXECUTED",
+            "date": "2023-03-22T22:22:22.222222",
+            "operationAmount": {"amount": "12345.67", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Пополнение счета",
+            "from": "Счет 99887766554433221100",
+            "to": "Счет 11223344556677889900",
+        },
+    ]
+    return info_input

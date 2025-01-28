@@ -6,37 +6,24 @@ from src.generators import card_number_generator, filter_by_currency, transactio
 
 
 @pytest.mark.parametrize(
-    "transactions, expected",
+    "expected",
     [
-        (
-            [
-                {
-                    "id": 555555555,
-                    "state": "EXECUTED",
-                    "date": "2023-03-22T22:22:22.222222",
-                    "operationAmount": {"amount": "12345.67", "currency": {"name": "USD", "code": "USD"}},
-                    "description": "Пополнение счета",
-                    "from": "Счет 99887766554433221100",
-                    "to": "Счет 11223344556677889900",
-                }
-            ],
-            [
-                {
-                    "id": 555555555,
-                    "state": "EXECUTED",
-                    "date": "2023-03-22T22:22:22.222222",
-                    "operationAmount": {"amount": "12345.67", "currency": {"name": "USD", "code": "USD"}},
-                    "description": "Пополнение счета",
-                    "from": "Счет 99887766554433221100",
-                    "to": "Счет 11223344556677889900",
-                }
-            ],
-        )
+        [
+            {
+                "id": 555555555,
+                "state": "EXECUTED",
+                "date": "2023-03-22T22:22:22.222222",
+                "operationAmount": {"amount": "12345.67", "currency": {"name": "USD", "code": "USD"}},
+                "description": "Пополнение счета",
+                "from": "Счет 99887766554433221100",
+                "to": "Счет 11223344556677889900",
+            }
+        ],
     ],
 )
-def test_filter_by_currency(transactions: list[dict], expected: list[dict]) -> None:
+def test_filter_by_currency(input_data_list_of_dicts: list[dict], expected: list[dict]) -> None:
     """функция проверяет, что сортировка по валюте работает исправно"""
-    result = list(filter_by_currency(transactions))
+    result = list(filter_by_currency(input_data_list_of_dicts))
     assert result == expected
 
 

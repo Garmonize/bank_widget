@@ -91,7 +91,7 @@ def card_number_generator(beginning: int = 1, end: int = 9999999999999999) -> It
         number_len = len(number_str)
         if number_len < REG_LENGHT:
             number_str = "0" * (REG_LENGHT - number_len) + number_str
-        grouped_bank_number = " ".join(number_str[i: i + 4] for i in range(0, REG_LENGHT, 4))
+        grouped_bank_number = " ".join(number_str[i : i + 4] for i in range(0, REG_LENGHT, 4))
         yield grouped_bank_number
 
 
